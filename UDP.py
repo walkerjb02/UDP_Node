@@ -47,29 +47,27 @@ class server:
                     self.clientSocket.sendto(str(message).encode(), (self.serverIP, int(j)))
                 n += 1
 
+
     def messagereceive(self):
         dupprotect = ['0']
         while 1:
-            shown = False
-            while shown == False:
-                self.inbound, clientAddress = self.serverSocket.recvfrom(2048)
-                if self.inbound:
-                    self.inbound = str(self.inbound)
-                    itera = 'aeiouy'
-                    for a in itera:
-                        if a in str(self.inbound):
-                            self.inbound = str(self.inbound)
-                            if self.inbound != dupprotect[-1]:
-                                dupprotect.append(self.inbound)
-                                print(str(self.inbound))
-                            else:
-                                pass
-                shown = True
+            self.inbound, clientAddress = self.serverSocket.recvfrom(2048)
+            if self.inbound:
+                self.inbound = str(self.inbound.decode())
+                itera = 'aeiouy'
+                for a in itera:
+                    if a in str(self.inbound):
+                        self.inbound = str(self.inbound)
+                        if self.inbound != dupprotect[-1]:
+                            dupprotect.append(self.inbound)
+                            print(str(self.inbound))
+                        else:
+                            pass
+
 
 s = server()
 
+tr.Thread(target=s.messagereceive).start()
 tr.Thread(target=s.connectionestablish).start()
 time.sleep(30)
 tr.Thread(target=s.messagesend).start()
-tr.Thread(target=s.messagereceive).start()
-
