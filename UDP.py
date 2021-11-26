@@ -6,7 +6,7 @@ class server:
     def __init__(self):
         self.serverSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.serverSocket.bind(('', 0))
-        self.serverIP = '10.0.0.46'
+        self.serverIP = #Input IP Here
         self.serverPort = self.serverSocket.getsockname()[1]
         print("serverIP:\t" + self.serverIP)
         print("serverPort:\t" + str(self.serverPort))
