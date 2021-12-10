@@ -26,7 +26,7 @@ class server:
                 self.port = str(self.port.decode('UTF-8'))
                 itera = '123456789'
                 for a in itera:
-                    if a in str(self.port) and len(self.port) == 5:
+                    if a in str(self.port) and len(self.port) == 5 or a in str(self.port) and len(self.port) == 4:
                         self.clientportmessage.append(self.port)
                     else:
                         pass
